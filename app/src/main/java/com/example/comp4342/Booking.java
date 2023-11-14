@@ -3,20 +3,18 @@ package com.example.comp4342;
 public class Booking {
     private String bookingID;
     private String userID;
-    private String name;
     private String roomID;
     private String checkInDate;
     private String checkOutDate;
-    private String distribution;
+    private String bookingStatus;
 
-    public Booking(String bookingID, String userID, String name, String roomID, String checkInDate, String checkOutDate) {
+    public Booking(String bookingID, String userID, String roomID, String checkInDate, String checkOutDate, String bookingStatus) {
         this.bookingID = bookingID;
         this.userID = userID;
-        this.name = name;
         this.roomID = roomID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
-        this.distribution = distribution;
+        this.bookingStatus = bookingStatus;
     }
 
     public String getBookingID() {
@@ -33,14 +31,6 @@ public class Booking {
 
     public void setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getRoomID() {
@@ -67,11 +57,9 @@ public class Booking {
         this.checkOutDate = checkOutDate;
     }
 
-    public String getDistribution() {
-        return distribution;
+    public String getBookingStatus() {
+        return bookingStatus;
     }
 
-    public void setDistribution(String distribution) {
-        this.distribution = distribution;
-    }
+
 }

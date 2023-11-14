@@ -67,7 +67,9 @@ public class FetchJsonTask extends AsyncTask<String, Void, List<Booking>> {
                 String checkOutDate = jsonObject.getString("checkOutDate");
                 String bookingStatus = jsonObject.getString("bookingStatus");
 
+
                 bookings.add(new Booking(bookingID, userID, roomID, checkInDate, checkOutDate, bookingStatus));
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
