@@ -4,26 +4,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-
-public class ManagementEditBookingFragment extends AppCompatActivity {
+public class ManagementConfirmBookingFragment extends AppCompatActivity {
 
     private ListView listView;
-    private BookingEditAdapter adapter;
+    private BookingConfirmAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_dashboard_edit_bookings);
+        setContentView(R.layout.fragment_dashboard_confirm_bookings);
 
         listView = findViewById(R.id.listView);
-        adapter = new BookingEditAdapter(this, new ArrayList<>());
-        listView.setAdapter(adapter);
+        adapter = new BookingConfirmAdapter(this, new ArrayList<>());
+        listView.setAdapter((ListAdapter) adapter);
 
         // Set an OnItemClickListener on the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -33,7 +33,7 @@ public class ManagementEditBookingFragment extends AppCompatActivity {
                 Booking booking = (Booking) adapter.getItem(position);
 
                 // Create an Intent to start the new activity
-                Intent intent = new Intent(ManagementEditBookingFragment.this, ManagementEditBookingFragmentPage.class);
+                Intent intent = new Intent(ManagementConfirmBookingFragment.this, ManagementConfirmBookingFragmentPage.class);
 
                 // Put extra data into the Intent
 //                assert booking != null;
@@ -52,7 +52,7 @@ public class ManagementEditBookingFragment extends AppCompatActivity {
         });
 
         listView = findViewById(R.id.listView);
-        adapter = new BookingEditAdapter(this, new ArrayList<>());
+        adapter = new BookingConfirmAdapter(this, new ArrayList<>());
         listView.setAdapter(adapter);
 
         adapter.add(new Booking("408", "4", "121", "2023-10-11", "2023-11-26", "Confirmed"));
@@ -81,3 +81,4 @@ public class ManagementEditBookingFragment extends AppCompatActivity {
 
 
 }
+

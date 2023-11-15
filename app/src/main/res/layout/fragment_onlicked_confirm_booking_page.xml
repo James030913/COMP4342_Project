@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Booking ID -->
+    <TextView
+        android:id="@+id/tvBookingId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Booking ID: "
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!-- User ID -->
+    <TextView
+        android:id="@+id/tvUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User ID: "
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!-- Room ID -->
+    <TextView
+        android:id="@+id/tvRoomId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room ID: "
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!-- Check-In Date -->
+    <TextView
+        android:id="@+id/tvCheckInDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check-In Date: "
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!-- Check-Out Date -->
+    <TextView
+        android:id="@+id/tvCheckOutDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check-Out Date: "
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!-- Confirm Button -->
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Confirm Booking" />
+
+    <!-- Reject Button -->
+    <Button
+        android:id="@+id/btnReject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Reject Booking" />
+
+</LinearLayout>

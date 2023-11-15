@@ -10,7 +10,7 @@
         android:id="@+id/tvConfirmPageTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Bookings"
+        android:text="Bookings Check-out"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
