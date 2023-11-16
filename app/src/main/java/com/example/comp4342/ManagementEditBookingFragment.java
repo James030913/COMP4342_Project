@@ -25,6 +25,7 @@ public class ManagementEditBookingFragment extends AppCompatActivity {
         adapter = new BookingEditAdapter(this, new ArrayList<>());
         listView.setAdapter(adapter);
 
+
         // Set an OnItemClickListener on the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,15 +56,15 @@ public class ManagementEditBookingFragment extends AppCompatActivity {
         adapter = new BookingEditAdapter(this, new ArrayList<>());
         listView.setAdapter(adapter);
 
-        adapter.add(new Booking("408", "4", "121", "2023-10-11", "2023-11-26", "Confirmed"));
-        adapter.add(new Booking("410", "1", "192", "2023-10-04", "2023-10-22", "Confirmed"));
-        adapter.add(new Booking("411", "7", "53", "2023-10-27", "2023-11-09", "Confirmed"));
+//        adapter.add(new Booking("408", "4", "121", "2023-10-11", "2023-11-26", "Confirmed"));
+//        adapter.add(new Booking("410", "1", "192", "2023-10-04", "2023-10-22", "Confirmed"));
+//        adapter.add(new Booking("411", "7", "53", "2023-10-27", "2023-11-09", "Confirmed"));
 
 
 //        Toast.makeText(ManagementEditBookingFragment.this, "This is a Toast message!", Toast.LENGTH_SHORT).show();
 
         // Pass the adapter to FetchJsonTask
-//        new FetchJsonTask(adapter).execute("https://great-grown-opossum.ngrok-free.app/bookings");
+        new FetchJsonTask(adapter).execute("https://great-grown-opossum.ngrok-free.app/bookings");
 
 
 

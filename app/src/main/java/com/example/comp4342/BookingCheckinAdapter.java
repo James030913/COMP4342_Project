@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 
 import java.util.List;
 
-public class BookingCheckinAdapter extends ArrayAdapter<Booking> {
+public class BookingCheckinAdapter extends ArrayAdapter<Booking> implements BookingAdapter{
     private Context context;
     private List<Booking> bookings; // Added to keep a reference to the bookings list
 
@@ -36,13 +36,14 @@ public class BookingCheckinAdapter extends ArrayAdapter<Booking> {
         TextView bookingRoomID = convertView.findViewById(R.id.roomID);
         TextView bookingCheckInDate = convertView.findViewById(R.id.checkInDate);
         TextView bookingCheckOutDate = convertView.findViewById(R.id.checkOutDate);
+        TextView bookingStatus = convertView.findViewById(R.id.status);
         // Populate the data into the template view using the data object
         bookingID.setText(booking.getBookingID());
         bookingUserID.setText(booking.getUserID());
         bookingRoomID.setText(booking.getRoomID());
         bookingCheckInDate.setText(booking.getCheckInDate());
         bookingCheckOutDate.setText(booking.getCheckOutDate());
-
+        bookingStatus.setText(booking.getBookingStatus());
 
         CardView checkinButton = convertView.findViewById(R.id.checkinBookingButton);
         checkinButton.setOnClickListener(new View.OnClickListener() {
@@ -52,17 +53,56 @@ public class BookingCheckinAdapter extends ArrayAdapter<Booking> {
                 Booking toCheckin = bookings.get(position);
                 String checkinedBookingId = toCheckin.getBookingID();
 
-                bookings.remove(toCheckin);
+                // Construct the JSON data
+                String jsonData = "[" +
+                        "{" +
+                        "\"bookingID\": " + toCheckin.getBookingID() + "," +
+                        "\"userID\": " + toCheckin.getUserID() + "," +
+                        "\"roomID\": " + toCheckin.getRoomID() + "," +
+                        "\"checkInDate\": \"" + toCheckin.getCheckInDate() + "\"," +
+                        "\"checkOutDate\": \"" + toCheckin.getCheckOutDate() + "\"," +
+                        "\"bookingStatus\": \"Checked In\"" +
+                        "}" +
+                        "]";
 
-                // Notify the adapter about the dataset change
-                notifyDataSetChanged();
+//                Toast.makeText(context, jsonData, Toast.LENGTH_SHORT).show();
 
-                // Show a Toast message including the booking ID
-                Toast.makeText(context, "Booking ID : " + checkinedBookingId + " Checked-in", Toast.LENGTH_SHORT).show();
 
+                new HttpTask(jsonData, "PUT", new HttpTask.HttpDataResponse() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle the successful response
+                        Toast.makeText(context, "Booking Checked-in successfully", Toast.LENGTH_SHORT).show();
+                        // Update the list and notify the adapter
+                        bookings.remove(toCheckin);
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        // Handle the failure
+                        Toast.makeText(context, "Failed to Checked-in booking", Toast.LENGTH_SHORT).show();
+                    }
+                }).execute();
             }
         });
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    @Override
+    public void add(Booking booking) {
+        if ("Confirmed".equals(booking.getBookingStatus())) {
+            super.add(booking);
+        }
+    }
+
+    @Override
+    public void addAll(List<Booking> bookings) {
+        for (Booking booking : bookings) {
+            if ("Confirmed".equals(booking.getBookingStatus())) {
+                super.add(booking); // Add only if status is 'Checked In'
+            }
+        }
     }
 }

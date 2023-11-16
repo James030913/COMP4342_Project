@@ -61,5 +61,8 @@ public class Booking {
         return bookingStatus;
     }
 
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
 
 }

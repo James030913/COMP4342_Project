@@ -17,10 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FetchJsonTask extends AsyncTask<String, Void, List<Booking>> {
-    private BookingEditAdapter adapter;
+    private BookingAdapter adapter;
 
-    // Constructor to accept the adapter
-    public FetchJsonTask(BookingEditAdapter adapter) {
+    public FetchJsonTask(BookingAdapter adapter) {
         this.adapter = adapter;
     }
     @Override

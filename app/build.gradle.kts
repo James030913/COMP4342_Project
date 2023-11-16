@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    // OkHttp
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
 //    implementation ("com.android.support:multidex:2.0.1")
     //cardview libraries
     implementation ("androidx.cardview:cardview:1.0.0")

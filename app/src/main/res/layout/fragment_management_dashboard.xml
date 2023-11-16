@@ -71,7 +71,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_people_24"
+                        android:src="@drawable/iconcheckin"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_people_24"
+                        android:src="@drawable/iconedit"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_people_24"
+                        android:src="@drawable/icondelete"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_people_24"
+                        android:src="@drawable/iconconfirm"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -213,7 +213,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_people_24" />
+                        android:src="@drawable/iconcheckout" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -243,7 +243,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_people_24" />
+                        android:src="@drawable/iconlogout" />
 
                     <TextView
                         android:layout_width="match_parent"
