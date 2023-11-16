@@ -3,6 +3,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">MapsActivity</string>
-
-
+    <string name="my_dashboard">My Dashboard</string>
+    <string name="delete" />
+    <string-array name="booking_status_array">
+        <item>Pending Confirm</item>
+        <item>Confirmed</item>
+        <item>Checked In</item>
+        <item>Checked Out</item>
+        <item>Cancelled</item>
+    </string-array>
 </resources>

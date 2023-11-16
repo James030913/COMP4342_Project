@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +35,7 @@
             android:value="YOUR_API_KEY" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".FragmentManagementDashboard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,6 +43,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ManagementEditBookingFragment"></activity>
+        <activity android:name=".ManagementEditBookingFragmentPage"></activity>
+        <activity android:name=".ManagementDeleteBookingFragment"></activity>
+        <activity android:name=".ManagementConfirmBookingFragment"></activity>
+        <activity android:name=".ManagementCheckinBookingFragment"></activity>
+        <activity android:name=".ManagementCheckoutBookingFragment"></activity>
+
     </application>
 
 </manifest>
