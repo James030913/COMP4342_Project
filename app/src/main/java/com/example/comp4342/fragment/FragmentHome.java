@@ -16,12 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
+import com.example.comp4342.HttpGetHotel;
+import com.example.comp4342.HttpTask;
 import com.example.comp4342.R;
 import com.example.comp4342.adapter.ImageAdapter;
 
 import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,7 +62,7 @@ public class FragmentHome extends Fragment {
             new ImageAdapter.Item(R.drawable.loginimg, "Image 2"),
             new ImageAdapter.Item(R.drawable.loginimg, "Image 3")
             // Add more items as needed
-    );
+    ); ;
     public FragmentHome() {
         // Required empty public constructor
     }
@@ -85,6 +92,8 @@ public class FragmentHome extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -99,6 +108,8 @@ public class FragmentHome extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         initDatePicker();
         dateButton = view.findViewById(R.id.datePickerButton);
@@ -146,6 +157,7 @@ public class FragmentHome extends Fragment {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 dateButton.setText(date);
+                System.out.println(date);
             }
         };
 

@@ -166,6 +166,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -174,9 +176,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutHeader">
 
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Popular Hotel In this Month"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                tools:ignore="MissingConstraints" />
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -184,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:scrollbars="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
