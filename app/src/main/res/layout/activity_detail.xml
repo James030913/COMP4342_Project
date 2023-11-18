@@ -29,13 +29,26 @@
         android:scaleType="centerCrop"/>
 
     <TextView
+        android:id="@+id/Loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="Location"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:text="$000000"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="@color/lavender"
         android:textSize="20sp"
         />
 
@@ -155,13 +168,14 @@
         android:layout_gravity="center"
         android:textColor="@color/lavender"
         android:textSize="18sp"
-        android:id="@+id/detailDesc"/>
+        />
+
 
     <TextView
         android:id="@+id/Desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="asdasdasdasd"
+        android:text=""
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="8dp"
@@ -169,21 +183,24 @@
         android:textSize="16sp"/>
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bookButton"
+            style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_margin="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/detail_top_background"
             android:backgroundTint="@color/lavender"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            style="@style/Widget.AppCompat.Button"
             android:text="Book Now"
-            android:layout_alignParentBottom="true"/>
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </RelativeLayout>
 
 </LinearLayout>

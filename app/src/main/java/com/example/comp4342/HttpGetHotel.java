@@ -25,7 +25,8 @@ public class HttpGetHotel extends AsyncTask<Void, Void, String> {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(data, JSON);
         Request request = new Request.Builder()
-                .url("https://great-grown-opossum.ngrok-free.app/hotels")
+                .url("https://great-grown-opossum.ngrok-free.app/hotels/search")
+                .method(requestMethod, body)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {

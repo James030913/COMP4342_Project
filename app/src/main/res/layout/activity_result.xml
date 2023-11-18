@@ -9,16 +9,24 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView01"
+        android:id="@+id/Search1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="123"/>
+        android:textSize="20sp"
+        android:text="You are searching:"/>
+    <TextView
+        android:id="@+id/Date1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="From xxxx to xxxx:"
+        android:layout_below="@+id/Search1"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"
         android:layout_marginTop="8dp"
         android:scrollbars="vertical"
-        android:layout_below="@+id/textView01"/>
+        android:layout_below="@+id/Date1"/>
 
 </RelativeLayout>

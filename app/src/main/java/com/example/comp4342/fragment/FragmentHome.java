@@ -2,6 +2,9 @@ package com.example.comp4342.fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -16,11 +19,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.comp4342.HomeActivity;
 import com.example.comp4342.HttpGetHotel;
 import com.example.comp4342.HttpTask;
 import com.example.comp4342.R;
+import com.example.comp4342.ResultActivity;
 import com.example.comp4342.adapter.ImageAdapter;
 
 import org.jetbrains.annotations.Nullable;
@@ -48,19 +55,25 @@ public class FragmentHome extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    String userName, userID;
     private DatePickerDialog datePickerDialog;
     private DatePickerDialog datePickerDialog1;
     private Button dateButton;
 
+    private TextView textUser;
     private Button dateButton1;
+    private Button searchButton;
 
+    private EditText locationSearch;
     private int asd = R.drawable.loginimg;
     private RecyclerView recyclerView;
     private ImageAdapter imageAdapter;
     private List<ImageAdapter.Item> items = Arrays.asList(
-            new ImageAdapter.Item(asd, "Image 1"),
-            new ImageAdapter.Item(R.drawable.loginimg, "Image 2"),
-            new ImageAdapter.Item(R.drawable.loginimg, "Image 3")
+            new ImageAdapter.Item(R.drawable.hotel1, "The Grand Hotel"),
+            new ImageAdapter.Item(R.drawable.hotel2, "Beachside Resort"),
+            new ImageAdapter.Item(R.drawable.hotel3, "Mountain Lodg"),
+            new ImageAdapter.Item(R.drawable.hotel4, "City Central"),
+            new ImageAdapter.Item(R.drawable.hotel5, "Harbor View")
             // Add more items as needed
     ); ;
     public FragmentHome() {
@@ -100,9 +113,31 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+// Retrieve data from SharedPreferences
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        userName = sharedPref.getString("Username", null);
+        userID = sharedPref.getString("UserId", null);
+        System.out.println(userName);
+        System.out.println(userID);
 
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        searchButton = view.findViewById(R.id.searchButton);
+        locationSearch = view.findViewById(R.id.Location);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ResultActivity.class);
+                // Pass user id to HomeActivity
+
+                intent.putExtra("Location", locationSearch.getText().toString());
+                intent.putExtra("Start", locationSearch.getText().toString());
+                intent.putExtra("End", locationSearch.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -112,11 +147,12 @@ public class FragmentHome extends Fragment {
 
 
         initDatePicker();
+        textUser = view.findViewById(R.id.textUsername);
         dateButton = view.findViewById(R.id.datePickerButton);
         dateButton1 = view.findViewById(R.id.datePickerButton1);
         dateButton.setText(getTodaysDate());
         dateButton1.setText(getTodaysDate());
-
+        textUser.setText(userName);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         imageAdapter = new ImageAdapter(items);
@@ -157,7 +193,7 @@ public class FragmentHome extends Fragment {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 dateButton.setText(date);
-                System.out.println(date);
+
             }
         };
 
@@ -185,7 +221,7 @@ public class FragmentHome extends Fragment {
 
     private String makeDateString(int day, int month, int year)
     {
-        return getMonthFormat(month) + " " + day + " " + year;
+        return year + "-" + month +"-" + day;
     }
 
     private String getMonthFormat(int month)

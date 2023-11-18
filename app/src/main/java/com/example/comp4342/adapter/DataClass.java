@@ -3,15 +3,19 @@ package com.example.comp4342.adapter;
 public class DataClass {
 
     private String dataTitle;
-    private int dataDesc;
+    private String dataDesc;
     private String dataLang;
     private int dataImage;
+
+    private String loc;
+
+    private int hotelID;
 
     public String getDataTitle() {
         return dataTitle;
     }
 
-    public int getDataDesc() {
+    public String getDataDesc() {
         return dataDesc;
     }
 
@@ -19,14 +23,23 @@ public class DataClass {
         return dataLang;
     }
 
+    public String getLoc() {
+        return loc;
+    }
+
+    public int getHotelID() {
+        return hotelID;
+    }
     public int getDataImage() {
         return dataImage;
     }
 
-    public DataClass(String dataTitle, int dataDesc, String dataLang, int dataImage) {
+    public DataClass(String dataTitle, String dataDesc, String dataLang, int dataImage, String loc, int hotelID) {
         this.dataTitle = dataTitle;
         this.dataDesc = dataDesc;
         this.dataLang = dataLang;
         this.dataImage = dataImage;
+        this.loc = loc;
+        this.hotelID = hotelID;
     }
 }
