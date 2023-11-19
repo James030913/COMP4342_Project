@@ -3,6 +3,7 @@ package com.example.comp4342;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,8 @@ public class DetailActivity extends AppCompatActivity {
     ImageView detailImage;
 
     int hotelID;
+
+    String start, end;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,9 @@ public class DetailActivity extends AppCompatActivity {
             location.setText(bundle.getString("Loc"));
             price.setText(bundle.getString("Price"));
             hotelID = bundle.getInt("HotelID");
+            start = bundle.getString("start");
+            end = bundle.getString("end");
+
         }
 
         bookButton.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +52,25 @@ public class DetailActivity extends AppCompatActivity {
 
                 // Put hotelID into the Intent
                 intent.putExtra("hotelID", hotelID);
+                intent.putExtra("start", start);
+                intent.putExtra("end", end);
 
                 // Start AfterActivity
+                startActivity(intent);
+            }
+        });
+
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String source = "LA";
+                String destination = location.getText().toString();
+
+
+                Uri uri = Uri.parse("https://www.google.com/maps/dir/" + source + "/" + destination);
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                intent.setPackage("com.google.android.apps.maps");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

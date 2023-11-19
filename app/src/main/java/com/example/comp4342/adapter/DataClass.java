@@ -11,6 +11,9 @@ public class DataClass {
 
     private int hotelID;
 
+    private String startTime;
+    private String endTime;
+
     public String getDataTitle() {
         return dataTitle;
     }
@@ -34,12 +37,21 @@ public class DataClass {
         return dataImage;
     }
 
-    public DataClass(String dataTitle, String dataDesc, String dataLang, int dataImage, String loc, int hotelID) {
+    public String getStartTime() {
+        return startTime;
+    }
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public DataClass(String dataTitle, String dataDesc, String dataLang, int dataImage, String loc, int hotelID, String startTime, String endTime) {
         this.dataTitle = dataTitle;
         this.dataDesc = dataDesc;
         this.dataLang = dataLang;
         this.dataImage = dataImage;
         this.loc = loc;
         this.hotelID = hotelID;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 }

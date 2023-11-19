@@ -131,8 +131,8 @@ public class FragmentHome extends Fragment {
                 // Pass user id to HomeActivity
 
                 intent.putExtra("Location", locationSearch.getText().toString());
-                intent.putExtra("Start", locationSearch.getText().toString());
-                intent.putExtra("End", locationSearch.getText().toString());
+                intent.putExtra("Start", dateButton.getText().toString());
+                intent.putExtra("End", dateButton1.getText().toString());
                 startActivity(intent);
             }
         });

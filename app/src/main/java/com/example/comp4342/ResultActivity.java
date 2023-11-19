@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.icu.text.SymbolTable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comp4342.adapter.*;
@@ -33,6 +34,8 @@ public class ResultActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<DataClass> dataList;
+
+    TextView text1, text2;
     DetailAdapter adapter;
     DataClass androidData;
 
@@ -58,15 +61,29 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        text1 = findViewById(R.id.Search1);
+        text2 = findViewById(R.id.Date1);
         Intent intent = getIntent();
         String locations = intent.getStringExtra("Location");
-        System.out.println(locations);
+        String start = intent.getStringExtra("Start");
+        String end = intent.getStringExtra("End");
+
+        text1.setText("You are searching: " + locations);
+        text2.setText("From " + start + " To " + end);
         recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(ResultActivity.this, 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         dataList = new ArrayList<>();
 
-        String jsonData = "{\"location\": \"New York\"}";
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("location", locations);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String jsonData = jsonObject.toString();
 
         OkHttpClient client = new OkHttpClient();
 
@@ -108,7 +125,7 @@ public class ResultActivity extends AppCompatActivity {
                                     new Thread(() -> {
                                         try {
                                             // Create a JSON body with the hotelID
-                                            String json = "{\"hotelID\": 1}";
+                                            String json = "{\"location\": 1}";
 
 // Create a media type for JSON
                                             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -132,7 +149,7 @@ public class ResultActivity extends AppCompatActivity {
                                             int averagePrice = total / roomTypeArray.length();
 
                                             // Add hotelName and averagePrice to the dataList
-                                            DataClass androidData = new DataClass(hotelName, desc , "Avg:$" + averagePrice+ "/Night", hotelPhoto[Integer.parseInt(hotelID)-1], loc, Integer.valueOf(hotelID));
+                                            DataClass androidData = new DataClass(hotelName, desc , "Avg:$" + averagePrice+ "/Night", hotelPhoto[Integer.parseInt(hotelID)-1], loc, Integer.valueOf(hotelID),start,end);
                                             dataList.add(androidData);
 
                                             // Update RecyclerView on the UI thread

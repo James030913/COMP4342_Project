@@ -47,7 +47,7 @@ public class DetailAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.recTitle.setText(dataList.get(position).getDataTitle());
         holder.recDesc.setText(dataList.get(position).getDataDesc());
         holder.recLang.setText(dataList.get(position).getDataLang());
-        String loc = dataList.get(position).getLoc();
+
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +58,8 @@ public class DetailAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("Loc", dataList.get(holder.getAdapterPosition()).getLoc());
                 intent.putExtra("Price", dataList.get(holder.getAdapterPosition()).getDataLang());
                 intent.putExtra("HotelID", dataList.get(holder.getAdapterPosition()).getHotelID());
+                intent.putExtra("start", dataList.get(holder.getAdapterPosition()).getStartTime());
+                intent.putExtra("end", dataList.get(holder.getAdapterPosition()).getEndTime());
                 context.startActivity(intent);
             }
         });

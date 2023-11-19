@@ -3,10 +3,15 @@ package com.example.comp4342;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +29,9 @@ import okhttp3.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AfterActivity extends AppCompatActivity {
 
@@ -33,6 +41,8 @@ public class AfterActivity extends AppCompatActivity {
 
     int [] roomsPhoto = {R.drawable.room1, R.drawable.room2,R.drawable.room3};
     int HotelID;
+    String userID;
+    String start, end;
     private final OkHttpClient httpClient = new OkHttpClient();
     private static final String URL = "https://great-grown-opossum.ngrok-free.app/roomTypes/byParam";
 
@@ -41,6 +51,14 @@ public class AfterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after);
 
+        SharedPreferences sharedPref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        userID = sharedPref.getString("UserId", null);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            start = bundle.getString("start");
+            end = bundle.getString("end");
+
+        }
         roomTypeList = new ArrayList<>();
 
         // Initialize RecyclerView
@@ -66,8 +84,78 @@ public class AfterActivity extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Handle the user's affirmation here, for example:
-                        // selectRoom(item);
+// Create a new single thread executor
+                        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+// Create a new handler on the main thread
+                        Handler handler = new Handler(Looper.getMainLooper());
+
+                        executor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Network request goes here...
+
+                                // Create a new OkHttpClient instance
+                                OkHttpClient client = new OkHttpClient();
+
+                                // Create JSON array
+                                JSONArray jsonArray = new JSONArray();
+
+                                // Generate a random roomID between 100 and 999
+                                Random random = new Random();
+                                int roomID = 100 + random.nextInt(900);  // Generates a random number between 100 (inclusive) and 999 (inclusive)
+
+                                // Create JSON object for the new booking
+                                JSONObject json = new JSONObject();
+                                try {
+                                    json.put("userID", Integer.parseInt(userID));
+                                    json.put("roomID", roomID); // Use the random roomID
+                                    json.put("checkInDate", start);
+                                    json.put("checkOutDate", end);
+                                    json.put("bookingStatus", "Pending Confirm");
+
+                                    // Add JSON object to JSON array
+                                    jsonArray.put(json);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                // Create request body from JSON array
+                                RequestBody body = RequestBody.create(jsonArray.toString(), MediaType.parse("application/json; charset=utf-8"));
+
+                                // Create a new POST request
+                                Request request = new Request.Builder()
+                                        .url("https://great-grown-opossum.ngrok-free.app/bookings")
+                                        .post(body)
+                                        .build();
+
+                                // Send the request asynchronously
+                                client.newCall(request).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if (!response.isSuccessful()) {
+                                            throw new IOException("Unexpected code " + response);
+                                        } else {
+                                            handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Intent intent = new Intent(getApplicationContext(), SuccessActivity.class);
+
+                                                    // Start AfterActivity
+                                                    startActivity(intent);
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
 
