@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.comp4342.fragment.FragmentOrder;
+
 import java.util.ArrayList;
 
 public class AdapterViewPager extends FragmentStateAdapter {
@@ -20,6 +22,11 @@ public class AdapterViewPager extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        if (position == 1) {
+            // Always return a new instance for the Order fragment
+            return new FragmentOrder();
+        }
+
         return arr.get(position);
     }
 

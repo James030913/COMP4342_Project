@@ -29,6 +29,9 @@
         <activity
             android:name=".ResultActivity"
             android:exported="false" />
+        <activity
+            android:name=".FragmentManagementDashboard"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

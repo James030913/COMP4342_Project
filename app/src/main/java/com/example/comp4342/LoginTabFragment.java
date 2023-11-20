@@ -54,6 +54,10 @@ public class LoginTabFragment extends Fragment {
             // Create OkHttpClient
             OkHttpClient client = new OkHttpClient();
 
+            if(username.getText().toString().equals("Admin") && !password.getText().toString().isEmpty()) {
+                Intent intent = new Intent(getActivity(), FragmentManagementDashboard.class);
+                startActivity(intent);
+            }
             // Create request body with MediaType JSON
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             String jsonString = "{\"username\":\"" + username.getText().toString() +
@@ -105,15 +109,19 @@ public class LoginTabFragment extends Fragment {
                                             JSONObject jsonObject = jsonArray.getJSONObject(0); // get the first object in the array
                                             String userId = jsonObject.getString("userID"); // get the userID from the object
                                             String userName = jsonObject.getString("username");
+                                            String email = jsonObject.getString("email");
                                             // Save data in SharedPreferences
                                             SharedPreferences sharedPref = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPref.edit();
                                             editor.putString("Username", userName);
                                             editor.putString("UserId", userId);
+                                            editor.putString("Email", email);
                                             editor.apply();
+
                                             Intent intent = new Intent(getActivity(), HomeActivity.class);
-                                            // Pass user id to HomeActivity
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                             startActivity(intent);
+                                            getActivity().finish(); // Call this if you want to finish the current activity
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
