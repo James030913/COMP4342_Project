@@ -48,6 +48,13 @@ public class FragmentManagementDashboard extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Check-out Bookings CardView
+        CardView logoutBookingsCard = findViewById(R.id.cardViewLogOut);
+        checkOutBookingsCard.setOnClickListener(v -> {
+            Intent intent = new Intent(FragmentManagementDashboard.this, MainActivity.class);
+            startActivity(intent);
+        });
+
         // Log-out CardView
         CardView logOutCard = findViewById(R.id.cardViewLogOut);
         logOutCard.setOnClickListener(v -> {
