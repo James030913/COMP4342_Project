@@ -112,7 +112,6 @@ public class FragmentOrder extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         sendPostRequest();
-
         return view;
     }
 
@@ -173,5 +172,11 @@ public class FragmentOrder extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sendPostRequest(); // Refresh data here
     }
 }

@@ -103,7 +103,7 @@ public class AfterActivity extends AppCompatActivity {
 
                                 // Generate a random roomID between 100 and 999
                                 Random random = new Random();
-                                int roomID = 100 + random.nextInt(900);  // Generates a random number between 100 (inclusive) and 999 (inclusive)
+                                int roomID = 100 + random.nextInt(300);  // Generates a random number between 100 (inclusive) and 999 (inclusive)
 
                                 // Create JSON object for the new booking
                                 JSONObject json = new JSONObject();
@@ -192,7 +192,14 @@ public class AfterActivity extends AppCompatActivity {
 
         // JSON format for the data to post
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
-        String content = "{\"hotelID\":1}";  // replace with your actual data
+        String content = null;  // replace with your actual data
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("hotelID", HotelID);
+            content = jsonObject.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // Request body
         RequestBody requestBody = RequestBody.create(MEDIA_TYPE, content);
